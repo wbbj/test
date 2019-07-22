@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="test:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/test_jar</output-path>
+    <root id="archive" name="test.jar">
+      <element id="module-output" name="test" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/webjars/bower/jquery/3.4.1/jquery-3.4.1.jar" path-in-jar="/" />
+      <element id="library" level="application" name="jquery-3.4.1" />
+      <element id="extracted-dir" path="/usr/local/apache-tomcat-8.5.43/lib/servlet-api.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.47/mysql-connector-java-5.1.47.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/json/json/20160810/json-20160810.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
