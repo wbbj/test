@@ -16,6 +16,7 @@ public class IsLoginFilter implements Filter {
         HttpServletRequest httpServletRequest= (HttpServletRequest) req;
         HttpServletResponse httpServletResponse= (HttpServletResponse) resp;
         HttpSession httpSession=httpServletRequest.getSession(false);
+
         if(null != httpSession){
             if(httpSession.getAttribute("success")!=null){
                 chain.doFilter(req, resp);

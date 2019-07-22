@@ -37,11 +37,12 @@ $(function () {
               data:"username="+escape($('#username').val())+"&password="+escape($('#password').val()),
               contentType: 'application/x-www-form-urlencoded',
               success: function (msg) {
-                  if(msg==="用户名或密码错误"){
+                  if(msg==="2"){
+                      alert("用户名或密码错误");
                       window.location.reload();
                   }
                   else if(msg==="1"){
-                      window.location.replace("http://localhost:8080/test/");
+                      window.location.replace("http://localhost:8080/test/index.html");
                   }
                   else {
                       alert("error");
