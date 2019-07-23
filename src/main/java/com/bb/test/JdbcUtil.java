@@ -17,71 +17,30 @@ import java.util.Properties;
  */
 public class JdbcUtil {
 
-    private static String driver;
-    private static String url;
-    private static String user;
-    private static String password;
+    private Connection connection = null;
+    public PreparedStatement statement = null;
 
-    static {
-        Properties prop = new Properties();
+    public JdbcUtil(String sql) {
         try {
-            //获取外部文件"jdbc.properties"的资源流
-            prop.load(JdbcUtil.class.getClassLoader().getResourceAsStream("/jdbc.properties"));
-            //从资源流里获取各个属性的值
-            driver=prop.getProperty("driver");
-            url=prop.getProperty("url");
-            user=prop.getProperty("user");
-            password=prop.getProperty("password");
-        } catch (IOException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
-        try {
-            //加载数据库驱动
-            Class.forName(driver);
-            System.out.println("数据库驱动加载成功");
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/student?useUnicode=true&characterEncoding=UTF-8","root","367494");
+            statement = connection.prepareStatement(sql);
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
-
-    //get链接方法
-    static Connection getConnection(){
-        Connection conn = null;
-        try {
-            //获取数据库链接
-            conn = DriverManager.getConnection(url,user,password);
-            System.out.println("数据库连接成功");
-
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return conn;
-    }
-
-    //关流方法
-    static void close(ResultSet res, PreparedStatement pst, Connection conn) {
-        if(null !=res) {
+    public void close(){
+        if (this.statement != null) {
             try {
-                res.close();
+                this.statement.close();
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
-        if(null !=pst) {
+        if (this.connection != null) {
             try {
-                pst.close();
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        if(null !=conn) {
-            try {
-                conn.close();
+                this.connection.close();
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
