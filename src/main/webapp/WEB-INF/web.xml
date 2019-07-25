@@ -3,6 +3,9 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
+  <welcome-file-list>
+    <welcome-file>user.html</welcome-file>
+  </welcome-file-list>
   <display-name>test</display-name>
   <filter>
     <filter-name>IsLoginFilter</filter-name>
@@ -15,11 +18,15 @@
 
   <servlet>
     <servlet-name>MyServlet</servlet-name>
-    <servlet-class>com.bb.test.MyServlet</servlet-class>
+    <servlet-class>com.bb.test.SearchMyServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>com.bb.test.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SearchMyServlet</servlet-name>
+    <servlet-class>com.bb.test.SearchMyServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>MyServlet</servlet-name>
@@ -28,6 +35,10 @@
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SearchMyServlet</servlet-name>
+    <url-pattern>/SearchMyServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>

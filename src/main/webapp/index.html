@@ -4,8 +4,43 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<script>
+function userpage() {
+    window.location.href="http://localhost:8080/test/user.html";
+}
+</script>
 <body>
+<div>
+    <button onclick="userpage()">垃圾分类查询页面</button>
+</div>
+<div>
+    <HR>
+</div>
 <h1>hello</h1>
+<div class="">
+    <input type="text" /><button>查询</button>
+    <table class="table table-hover table-bordered">
 
+        <tr>
+            <td>是否有查找的垃圾</td>
+        </tr>
+        <tr>
+            <th><h5>名称</h5></th>
+        </tr>
+        <tr>
+            <th><h5>种类</h5></th>
+        </tr>
+        <tr>
+            <th><h5>描述</h5></th>
+        </tr>
+        <tr>
+            <th><h5>处理方式</h5></th>
+        </tr>
+    </table>
+    <form>
+        <button>修改</button>
+        <button>添加</button>
+    </form>
+</div>
 </body>
 </html>

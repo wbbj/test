@@ -1,20 +1,10 @@
 package com.bb.test;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Properties;
 
-
-/**
- * @Classname: JdbcUtils
- * @author Firedance
- * @version 2018年5月16日 下午8:04:55
- *
- */
 public class JdbcUtil {
 
     private Connection connection = null;
@@ -23,7 +13,7 @@ public class JdbcUtil {
     public JdbcUtil(String sql) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/student?useUnicode=true&characterEncoding=UTF-8","root","367494");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/refuse_classification?useUnicode=true&characterEncoding=UTF-8&useSSL=false","root","367494");
             statement = connection.prepareStatement(sql);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();

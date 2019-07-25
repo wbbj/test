@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<script>
+    function managePage() {window.location.href="http://localhost:8080/test/index.html";}//返回管理员界面
+    function manageLogin() {window.location.href="http://localhost:8080/test/login.html";}//进入登录界面
+    function Recycle() {//可回收垃圾简介
+        var Recycle=document.getElementById("Recycle");
+        var Harm=document.getElementById("Harm");
+        var Wet=document.getElementById("Wet");
+        var Dry=document.getElementById("Dry");
+        if(Recycle.style.display==='none'){
+            Recycle.style.display='inline';
+            Harm.style.display='none';
+            Wet.style.display='none';
+            Dry.style.display='none';
+        }else {
+            Harm.style.display='none';
+            Wet.style.display='none';
+            Dry.style.display='none';
+        }
+    }
+    function Harm() {//有害垃圾简介
+        var Recycle=document.getElementById("Recycle");
+        var Harm=document.getElementById("Harm");
+        var Wet=document.getElementById("Wet");
+        var Dry=document.getElementById("Dry");
+        if(Harm.style.display==='none'){
+            Harm.style.display='inline';
+            Recycle.style.display='none';
+            Wet.style.display='none';
+            Dry.style.display='none';
+        }else {
+            Recycle.style.display='none';
+            Wet.style.display='none';
+            Dry.style.display='none';
+        }
+    }
+    function Wet() {//湿垃圾简介
+        var Recycle=document.getElementById("Recycle");
+        var Harm=document.getElementById("Harm");
+        var Wet=document.getElementById("Wet");
+        var Dry=document.getElementById("Dry");
+        if(Wet.style.display==='none'){
+            Wet.style.display='inline';
+            Recycle.style.display='none';
+            Harm.style.display='none';
+            Dry.style.display='none';
+
+        }else {
+            Recycle.style.display='none';
+            Harm.style.display='none';
+            Dry.style.display='none';
+        }
+    }
+    function Dry() {//干垃圾简介
+        var Recycle=document.getElementById("Recycle");
+        var Harm=document.getElementById("Harm");
+        var Wet=document.getElementById("Wet");
+        var Dry=document.getElementById("Dry");
+        if(Dry.style.display==='none'){
+            Dry.style.display='inline';
+            Recycle.style.display='none';
+            Harm.style.display='none';
+            Wet.style.display='none';
+        }else {
+            Recycle.style.display='none';
+            Harm.style.display='none';
+            Wet.style.display='none';
+        }
+    }
+
+    $(function () {
+        $("#select").click(function () {
+            $.ajax({
+                type:'POST',
+                dataType:'text',
+                url:'SearchMyServlet',
+                data:"name="+encodeURI($('#name').val()),
+                contentType:'application/x-www-form-urlencoded',
+                success:function () {
+
+                }
+            })
+        })
+    })
+</script>
+<body>
+<div>
+    <button onclick="managePage()">垃圾分类管理界面</button>
+    <button onclick="manageLogin()">管理员登录</button>
+</div>
+<div>
+    <HR>
+</div>
+<div style="width:800px; margin-left:auto; margin-right:auto; background-color:forestgreen; color:White; height:400px">
+
+    <div style="width:250px; margin-left:auto; margin-right:auto; height:20px">
+
+        <form>
+
+            <input type="text" name="name" id="name"/><button id="select">查询</button>
+
+        </form>
+
+    </div>
+
+    <div>
+        <HR>
+    </div>
+
+    <div style="width:600px; margin-left:auto; margin-right:auto; height:300px">
+
+        <button onclick="Recycle()">可回收垃圾</button><button onclick="Harm()">有害垃圾</button><button onclick="Wet()">湿垃圾</button><button onclick="Dry()">干垃圾</button>
+
+        <div id="Recycle" style="display:inline">
+
+            <div>
+                <h1>可回收垃圾</h1>
+                <h1>可回收垃圾</h1>
+                <h1>可回收垃圾</h1>
+                <h1>可回收垃圾</h1>
+            </div>
+
+        </div>
+
+        <div id="Harm" style="display:none">
+            <div>
+                <h1>有害垃圾</h1>
+                <h1>有害垃圾</h1>
+                <h1>有害垃圾</h1>
+                <h1>有害垃圾</h1>
+            </div>
+        </div>
+
+        <div id="Wet" style="display:none">
+            <div>
+                <h1>湿垃圾</h1>
+                <h1>湿垃圾</h1>
+                <h1>湿垃圾</h1>
+                <h1>湿垃圾</h1>
+
+            </div>
+        </div>
+
+        <div id="Dry" style="display:none">
+            <div>
+                <h1>干垃圾</h1>
+                <h1>干垃圾</h1>
+                <h1>干垃圾</h1>
+                <h1>干垃圾</h1>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

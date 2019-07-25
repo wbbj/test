@@ -24,9 +24,6 @@ public class IsLoginFilter implements Filter {
         }else httpServletResponse.sendRedirect("login.html");
 
     }
-
     public void init(FilterConfig config) throws ServletException {
-
     }
-
 }
