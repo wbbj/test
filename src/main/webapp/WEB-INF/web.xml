@@ -18,15 +18,15 @@
 
   <servlet>
     <servlet-name>MyServlet</servlet-name>
-    <servlet-class>com.bb.test.SearchMyServlet</servlet-class>
+    <servlet-class>com.bb.test.SearchServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>com.bb.test.LoginServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>SearchMyServlet</servlet-name>
-    <servlet-class>com.bb.test.SearchMyServlet</servlet-class>
+    <servlet-name>SearchServlet</servlet-name>
+    <servlet-class>com.bb.test.SearchServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>MyServlet</servlet-name>
@@ -37,8 +37,8 @@
     <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>SearchMyServlet</servlet-name>
-    <url-pattern>/SearchMyServlet</url-pattern>
+    <servlet-name>SearchServlet</servlet-name>
+    <url-pattern>/SearchServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>

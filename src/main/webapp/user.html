@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="external nofollow" >
 </head>
 <script>
     function managePage() {window.location.href="http://localhost:8080/test/index.html";}//返回管理员界面
     function manageLogin() {window.location.href="http://localhost:8080/test/login.html";}//进入登录界面
+
+    //实现了点击切换表单域,不用的表单隐藏起来
     function Recycle() {//可回收垃圾简介
         var Recycle=document.getElementById("Recycle");
         var Harm=document.getElementById("Harm");
@@ -67,6 +70,7 @@
             Recycle.style.display='none';
             Harm.style.display='none';
             Wet.style.display='none';
+
         }else {
             Recycle.style.display='none';
             Harm.style.display='none';
@@ -74,22 +78,38 @@
         }
     }
 
-    $(function () {
+// 查询的ajax请求
+    $(document).ready(function () {
         $("#select").click(function () {
             $.ajax({
                 type:'POST',
                 dataType:'text',
-                url:'SearchMyServlet',
+                url:'SearchServlet',
                 data:"name="+encodeURI($('#name').val()),
                 contentType:'application/x-www-form-urlencoded',
-                success:function () {
-
+                success:function (msg) {
+                    if(msg==="1"){
+                        alert("未收录此垃圾")
+                    }
+                    if(msg==="2"){
+                        alert("请输入要查询的垃圾");
+                    }
+                    else {
+                        for(i in msg.split(" "))
+                        {
+                            var tr;
+                            tr='<td>'+msg.split(" ")[i]+'</td>';
+                            $("#list").append('<tr>'+tr+'</tr>')
+                        }
+                    }
                 }
             })
         })
-    })
+    });
+
 </script>
 <body>
+<!--页面跳转-->
 <div>
     <button onclick="managePage()">垃圾分类管理界面</button>
     <button onclick="manageLogin()">管理员登录</button>
@@ -97,63 +117,141 @@
 <div>
     <HR>
 </div>
-<div style="width:800px; margin-left:auto; margin-right:auto; background-color:forestgreen; color:White; height:400px">
+
+<!--整个显示区域-->
+<div style="width:800px; margin-left:auto; margin-right:auto; background-color:forestgreen; color:White; height:900px">
 
     <div style="width:250px; margin-left:auto; margin-right:auto; height:20px">
-
+<!--        查询的区域-->
         <form>
 
             <input type="text" name="name" id="name"/><button id="select">查询</button>
 
         </form>
+<!--        拍照选项-->
+
+
+<!--        语音选项-->
+
 
     </div>
 
     <div>
         <HR>
     </div>
+    <div>
+        <table>
+            <tbody id="list">
 
-    <div style="width:600px; margin-left:auto; margin-right:auto; height:300px">
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <HR>
+    </div>
+    <div style="width:600px; margin-left:auto; margin-right:auto;background-color:cornflowerblue; height:500px">
 
-        <button onclick="Recycle()">可回收垃圾</button><button onclick="Harm()">有害垃圾</button><button onclick="Wet()">湿垃圾</button><button onclick="Dry()">干垃圾</button>
+        <button onclick="Recycle()">可回收物</button><button onclick="Harm()">有害垃圾</button><button onclick="Wet()">湿垃圾</button><button onclick="Dry()">干垃圾</button>
 
-        <div id="Recycle" style="display:inline">
+        <div>
+        <table id="Recycle" style="display:inline">
 
-            <div>
-                <h1>可回收垃圾</h1>
-                <h1>可回收垃圾</h1>
-                <h1>可回收垃圾</h1>
-                <h1>可回收垃圾</h1>
-            </div>
+            <tr>
+                <td>可回收物是指,适宜回收利用和资源化利用的生活废弃物,如废纸张、废塑料、废玻璃制品、废金属、废织物等</td>
+            </tr>
+            <tr>
+                <td><h4>可回收物主要包括：</h4></td>
+            </tr>
 
-        </div>
+            <tr>
+                <td>报纸、纸箱、书本、广告单、塑料瓶、塑料玩具、油桶、酒瓶、玻璃杯、易拉罐、旧铁锅、旧衣服、包、旧玩偶、旧数码产品、旧家电回收垃圾</td>
+            </tr>
+            <tr>
+                <td><h4>可回收物投放要求</h4></td>
+            </tr>
+            <tr>
+                <td>轻投轻放</td>
+            </tr>
+            <tr>
+                <td>清洁干燥、避免污染,废纸尽量平整</td>
+            </tr>
+            <tr>
+                <td>立体包装请清空内容物,清洁后压扁投放</td>
+            <tr>
+                <td> 有尖锐边角的,应包裹后投放</td>
+            </tr>
 
-        <div id="Harm" style="display:none">
-            <div>
-                <h1>有害垃圾</h1>
-                <h1>有害垃圾</h1>
-                <h1>有害垃圾</h1>
-                <h1>有害垃圾</h1>
-            </div>
-        </div>
+        </table>
 
-        <div id="Wet" style="display:none">
-            <div>
-                <h1>湿垃圾</h1>
-                <h1>湿垃圾</h1>
-                <h1>湿垃圾</h1>
-                <h1>湿垃圾</h1>
+        <table id="Harm" style="display:none">
+            <tr>
+                <td>有害垃圾是指，对人体健康或者自然环境造成直接或潜在危害的废弃物</td>
+            </tr>
+            <tr>
+                <td><h4>有害垃圾主要包括：</h4></td>
+            </tr>
 
-            </div>
-        </div>
+            <tr>
+                <td>废电池（充电电池、铅酸电池、镍镉电池、纽扣电池等）、废油漆、消毒剂、荧光灯管、含汞温度计、废药品及其包装物等</td>
+            </tr>
+            <tr>
+                <td><h4>有害垃圾投放要求</h4></td>
+            </tr>
+            <tr>
+                <td>投放时请注意轻放</td>
+            </tr>
+            <tr>
+                <td>易破损的请连带包装或包裹后轻放</td>
+            </tr>
+            <tr>
+                <td>如易挥发，请密封后投放</td>
+            </tr>
+        </table>
 
-        <div id="Dry" style="display:none">
-            <div>
-                <h1>干垃圾</h1>
-                <h1>干垃圾</h1>
-                <h1>干垃圾</h1>
-                <h1>干垃圾</h1>
-            </div>
+        <table id="Wet" style="display:none">
+            <tr>
+                <td>湿垃圾是指，日常生活垃圾产生的容易腐烂的生物质废弃物</td>
+            </tr>
+            <tr>
+                <td><h4>湿垃圾主要包括：</h4></td>
+            </tr>
+
+            <tr>
+                <td>食材废料、剩饭剩菜、过期食品、蔬菜水果、瓜皮果核、花卉绿植、中药残渣等</td>
+            </tr>
+            <tr>
+                <td><h4>湿垃圾投放要求</h4></td>
+            </tr>
+            <tr>
+                <td>纯流质的食物垃圾，如牛奶等，应直接倒进下水口</td>
+            </tr>
+            <tr>
+                <td>有包装物的湿垃圾应将包装物去除后分类投放，包装物请投放到对应的可回收物或干垃圾容器</td>
+            </tr>
+        </table>
+
+        <table id="Dry" style="display:none">
+            <tr>
+                <td>干垃圾是指，除可回收物、有害垃圾、湿垃圾以外的其它生活废弃物</td>
+            </tr>
+            <tr>
+                <td><h4>干垃圾主要包括：</h4></td>
+            </tr>
+
+            <tr>
+                <td>餐盒、餐巾纸、湿纸巾、卫生间用纸、塑料袋、食品包装袋、污染严重的纸、烟蒂、纸尿裤、一次性杯子、大骨头、贝壳、花盆等</td>
+            </tr>
+            <tr>
+            <tr>
+                <td><h4>干垃圾投放要求</h4></td>
+            </tr>
+            <tr>
+                <td>尽量沥干水分</td>
+            </tr>
+            <tr>
+                <td>难以辨识类别的生活垃圾投入干垃圾容器内</td>
+            </tr>
+        </table>
         </div>
     </div>
 </div>
