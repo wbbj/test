@@ -10,15 +10,52 @@ public class SearchServlet extends javax.servlet.http.HttpServlet {
         response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
 
-        String gname=request.getParameter("name");
-        System.out.println(gname);
-        if(gname!=null&& !gname.equals("") && !gname.equals(" ")) {//判断是否有输入
+        //管理员快捷查询
+//        String sname=request.getParameter("searchname");
+//        System.out.println(sname);
+//        StringBuilder sgname=new StringBuilder();
+//        for(int i=0;i<sname.toCharArray().length;i++){
+//            sgname.append("%").append(sname.toCharArray()[i]);
+//        }
+//        if(!sname.equals("") && !sname.equals(" ")) {//判断是否有输入
+//            try {
+//                //从表中获取垃圾名称
+//                String sqls="select * from garbage where gname like ?";
+//                //调用数据库工具类
+//                JdbcUtil jdbcUtils=new JdbcUtil(sqls);
+//                jdbcUtils.statement.setString(1,sgname.toString());
+//                ResultSet rss=jdbcUtils.statement.executeQuery();
+//                if (!rss.next()) {
+//                    response.getWriter().write("1");
+//                }
+//                rss.previous();
+//                while (rss.next()) {
+//                    response.getWriter().write("2");
+//                }
+//                jdbcUtils.close();
+//                rss.close();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }else {
+//            response.getWriter().write("3");
+//        }
+
+
+        //用户的查询
+        String aname=request.getParameter("name");
+        StringBuilder name=new StringBuilder();
+        for(int i=0;i<aname.toCharArray().length;i++){
+            name.append("%").append(aname.toCharArray()[i]);
+        }
+
+        if(!aname.equals("") && !aname.equals(" ")) {//判断是否有输入
             try {
                 //从表中获取垃圾名称
-                String sql="select * from garbage where gname=?";
+                String sql="select * from garbage where gname like ?";
                 //调用数据库工具类
                 JdbcUtil jdbcUtil=new JdbcUtil(sql);
-                jdbcUtil.statement.setString(1,gname);
+                jdbcUtil.statement.setString(1,name.toString());
                 ResultSet rs=jdbcUtil.statement.executeQuery();
                 if (!rs.next()) {
                     response.getWriter().write("1");
@@ -37,6 +74,7 @@ public class SearchServlet extends javax.servlet.http.HttpServlet {
                     }
                     response.getWriter().write(sb.toString());//将所有垃圾信息整合发送
                 }
+                jdbcUtil.close();
 
             } catch (Exception e) {
                 e.printStackTrace();

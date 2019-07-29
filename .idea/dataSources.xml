@@ -15,7 +15,7 @@
         <property name="yearIsDateType" value="false" />
       </driver-properties>
     </data-source>
-    <data-source source="LOCAL" name="refuse_classification@localhost" uuid="322ef224-5b81-4836-a07e-d211dabf20a1">
+    <data-source source="LOCAL" name="refuse_classification" uuid="322ef224-5b81-4836-a07e-d211dabf20a1">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>

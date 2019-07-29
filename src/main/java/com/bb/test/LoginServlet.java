@@ -44,6 +44,7 @@ public class LoginServlet extends HttpServlet {
 
                 }
             }
+            jdbcUtil.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

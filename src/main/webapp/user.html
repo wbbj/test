@@ -10,6 +10,8 @@
     function managePage() {window.location.href="http://localhost:8080/test/index.html";}//返回管理员界面
     function manageLogin() {window.location.href="http://localhost:8080/test/login.html";}//进入登录界面
 
+    // function managePage() {window.location.href="http://129.211.1.53:8080/test/index.html";}//返回管理员界面
+    // function manageLogin() {window.location.href="http://129.211.1.53:8080/test/login.html";}//进入登录界面
     //实现了点击切换表单域,不用的表单隐藏起来
     function Recycle() {//可回收垃圾简介
         var Recycle=document.getElementById("Recycle");
@@ -80,7 +82,7 @@
 
 // 查询的ajax请求
     $(document).ready(function () {
-        $("#select").click(function () {
+        $("#select").click(function (event) {event.preventDefault();
             $.ajax({
                 type:'POST',
                 dataType:'text',
@@ -88,19 +90,24 @@
                 data:"name="+encodeURI($('#name').val()),
                 contentType:'application/x-www-form-urlencoded',
                 success:function (msg) {
-                    if(msg==="1"){
+                    $('#list').text("");//清空id位list的区域
+                    if(msg==="1"){//数据库中不存在此垃圾
+
                         alert("未收录此垃圾")
                     }
-                    if(msg==="2"){
+                    else if(msg==="2"){//未检测到有输入
+
                         alert("请输入要查询的垃圾");
                     }
-                    else {
+                    else {//找到垃圾并显示出来动态创建表格
+
                         for(i in msg.split(" "))
                         {
                             var tr;
                             tr='<td>'+msg.split(" ")[i]+'</td>';
                             $("#list").append('<tr>'+tr+'</tr>')
                         }
+
                     }
                 }
             })
@@ -121,20 +128,20 @@
 <!--整个显示区域-->
 <div style="width:800px; margin-left:auto; margin-right:auto; background-color:forestgreen; color:White; height:900px">
 
-    <div style="width:250px; margin-left:auto; margin-right:auto; height:20px">
 <!--        查询的区域-->
         <form>
 
             <input type="text" name="name" id="name"/><button id="select">查询</button>
 
         </form>
+
+
 <!--        拍照选项-->
 
 
 <!--        语音选项-->
 
 
-    </div>
 
     <div>
         <HR>

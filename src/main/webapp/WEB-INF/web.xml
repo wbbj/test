@@ -28,6 +28,10 @@
     <servlet-name>SearchServlet</servlet-name>
     <servlet-class>com.bb.test.SearchServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>AddServlet</servlet-name>
+    <servlet-class>com.bb.test.AddServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>MyServlet</servlet-name>
     <url-pattern>/MyServlet</url-pattern>
@@ -39,6 +43,10 @@
   <servlet-mapping>
     <servlet-name>SearchServlet</servlet-name>
     <url-pattern>/SearchServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddServlet</servlet-name>
+    <url-pattern>/AddServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>
