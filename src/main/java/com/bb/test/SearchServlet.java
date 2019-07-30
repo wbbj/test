@@ -48,7 +48,7 @@ public class SearchServlet extends javax.servlet.http.HttpServlet {
         for(int i=0;i<aname.toCharArray().length;i++){
             name.append("%").append(aname.toCharArray()[i]);
         }
-
+        name.append("%");
         if(!aname.equals("") && !aname.equals(" ")) {//判断是否有输入
             try {
                 //从表中获取垃圾名称

@@ -23,6 +23,7 @@ public class AddServlet extends HttpServlet {
         for(int i=0;i<gname.toCharArray().length;i++){
             name.append("%").append(gname.toCharArray()[i]);
         }
+        name.append("%");
         if(!gname.equals("") && !gname.equals(" ")&&!variety.equals("") && !variety.equals(" ")&&!describe.equals("") && !describe.equals(" ")&&!handle.equals("") && !handle.equals(" ")) {//判断是否有输入
             try {
                 //从表中获取垃圾名称
