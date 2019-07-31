@@ -7,6 +7,8 @@ public class JdbcUtil {
     private Connection connection = null;
     PreparedStatement statement = null;
     Statement statement1=null;
+    //设置了两个工具以满足不同语句的需求
+    //带sql语句参数的数据库连接工具
     JdbcUtil(String sql) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -17,6 +19,7 @@ public class JdbcUtil {
             e.printStackTrace();
         }
     }
+    //不带参数的工具
     JdbcUtil(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -27,6 +30,7 @@ public class JdbcUtil {
             e.printStackTrace();
         }
     }
+    //关闭
     void close(){
         if (this.statement1 != null) {
             try {

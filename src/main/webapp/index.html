@@ -10,6 +10,7 @@ function userpage() {
      window.location.href="http://localhost:8080/test/user.html";
     // window.location.href="http://129.211.1.53:8080/test/user.html";
 }
+// 添加的ajax请求
 $(document).ready(function () {
     $("#add").click(function (event) {event.preventDefault();
         $.ajax({
@@ -20,7 +21,7 @@ $(document).ready(function () {
             contentType:'application/x-www-form-urlencoded',
             success:function (msg) {
                 if(msg==="1"){
-                    alert("发送成功");
+                    alert("添加信息成功");
                 }
                 if(msg==="2"){
                     alert("已存在此垃圾");
@@ -32,24 +33,25 @@ $(document).ready(function () {
             }
         })
     });
-    // $("#search").click(function (event) {event.preventDefault();
-    //     $.ajax({
-    //         type:'POST',
-    //         dataType:'text',
-    //         url:'SearchServlet',
-    //         data:"searchname="+encodeURI($('#searchname').val()),
-    //         contentType:'application/x-www-form-urlencoded',
-    //         success:function (msg) {
-    //             if (msg==="1"){
-    //                 alert("此垃圾不存在可以添加");
-    //             }else if (msg==="2"){
-    //                 aler("此垃圾已存在无需添加");
-    //             }else if(msg==="3"){
-    //                 alert("请输入要查询的垃圾");
-    //             }
-    //         }
-    //     })
-    // })
+    //查询
+    $("#search").click(function (event) {event.preventDefault();
+        $.ajax({
+            type:'POST',
+            dataType:'text',
+            url:'QuickSearchServlet',
+            data:"searchname="+encodeURI($('#searchname').val()),
+            contentType:'application/x-www-form-urlencoded',
+            success:function (msg) {
+                if (msg==="1"){
+                    alert("此垃圾不存在可以添加");
+                }else if (msg==="2"){
+                    alert("此垃圾已存在无需添加");
+                }else if(msg==="3"){
+                    alert("请输入要查询的垃圾");
+                }
+            }
+        })
+    })
 });
 
 </script>

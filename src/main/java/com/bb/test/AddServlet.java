@@ -15,15 +15,19 @@ public class AddServlet extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
 
+        //获取前台请求的垃圾的所有数据
         String gname=request.getParameter("gname");
         String variety=request.getParameter("variety");
         String describe=request.getParameter("describe");
         String handle=request.getParameter("handle");;
+        //整合模糊查询
         StringBuilder name=new StringBuilder();
         for(int i=0;i<gname.toCharArray().length;i++){
             name.append("%").append(gname.toCharArray()[i]);
         }
         name.append("%");
+
+        //判断是否有输入
         if(!gname.equals("") && !gname.equals(" ")&&!variety.equals("") && !variety.equals(" ")&&!describe.equals("") && !describe.equals(" ")&&!handle.equals("") && !handle.equals(" ")) {//判断是否有输入
             try {
                 //从表中获取垃圾名称
@@ -33,7 +37,8 @@ public class AddServlet extends HttpServlet {
                 jdbcUtil.statement.setString(1,name.toString());
 
                 ResultSet rs=jdbcUtil.statement.executeQuery();
-                if (!rs.next()) {//如果库中没有此垃圾
+                //如果库中没有此垃圾,执行以下操作
+                if (!rs.next()) {
                     try {
                         JdbcUtil jdbcUtil1 = new JdbcUtil();
                         String sql1 = "insert into garbage values('" +
@@ -47,6 +52,7 @@ public class AddServlet extends HttpServlet {
                                 "')";
 
                         jdbcUtil1.statement1.execute(sql1);
+                        //插入成功返回一个响应以提醒插入成功
                         response.getWriter().write("1");
                         jdbcUtil1.close();
 
@@ -56,6 +62,7 @@ public class AddServlet extends HttpServlet {
 
                 }
                 rs.previous();
+                //数据库已存在所插入数据的情况
                 while (rs.next()) {
                     jdbcUtil.close();
                     rs.close();

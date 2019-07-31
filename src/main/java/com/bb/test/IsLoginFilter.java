@@ -17,11 +17,13 @@ public class IsLoginFilter implements Filter {
         HttpServletResponse httpServletResponse= (HttpServletResponse) resp;
         HttpSession httpSession=httpServletRequest.getSession(false);
 
+        //判断请求
         if(null != httpSession){
-            if(httpSession.getAttribute("success")!=null){
+            //判断Session是否存在success标记
+            if(httpSession.getAttribute("success")!=null){//存在则不需要继续登录
                 chain.doFilter(req, resp);
-            }else httpServletResponse.sendRedirect("login.html");
-        }else httpServletResponse.sendRedirect("login.html");
+            }else httpServletResponse.sendRedirect("login.html");//不存在则跳转登录
+        }else httpServletResponse.sendRedirect("login.html");//用户未登录就请求页面直接拦截
 
     }
     public void init(FilterConfig config) throws ServletException {
